@@ -4,8 +4,9 @@ public class proyecto{
     //========[  CARGAR SUELDOS  ]==========//
     public static void cargarSueldo(int[] lista_sueldos){
         Scanner sc = new Scanner(System.in);
+        System.out.println("====[  Escriba el sueldo  ]====");
         for(int i= 0; i<lista_sueldos.length;i++){
-            System.out.println("====[  Escriba el sueldo  ]====");
+            System.out.print(     "Empleado " + i + " Sueldo >> ");
             lista_sueldos[i] = sc.nextInt();
         
         }
@@ -14,7 +15,7 @@ public class proyecto{
 
     //========[  MOSTRAR SUELDOS  ]==========//
     public static void mostrarSueldo(int[] lista_sueldos){
-        System.out.println("======[  Sueldos  ]======");
+        System.out.println("      ======[  Sueldos  ]======");
         for(int i=0;i < lista_sueldos.length; i++){
             System.out.println("====[  Empleado " + i + " Sueldo >> " + lista_sueldos[i] + "$  ]====");
         }
@@ -24,17 +25,22 @@ public class proyecto{
     //=========[  BUSCAR SUELDOS ]============//
     public static boolean buscar(int[] lista_sueldos){
         Scanner sc = new Scanner(System.in);
-        System.out.println("====[  Escriba el ID del empleado:  ]====");
+        
+        while (true){
+        System.out.println("\n====[  Escriba -1 para volver al menu  ]====");
+        System.out.println("====[  Escriba el ID del empleado:  ]====\n");
         int num_emp = sc.nextInt();
         if (num_emp > lista_sueldos.length -1 ){
             System.out.println("No existe tal empleado");
-            return false;
-        }
+            continue;
+        }else if(num_emp == -1){return false;}
         else{
             System.out.println("====[  Empleado " + num_emp +" Sueldo >> " + lista_sueldos[num_emp] + "  ]====");
-            return true;
-          }
+            continue;
+          }}
         }
+    
+
         
     //=========[  BUSCAR RANGO DE SUELDOS  ]=========//
     public static void rangoSueldos(int[] lista_sueldos){
@@ -70,17 +76,55 @@ public class proyecto{
     //==========[  AUMENTAR SUELDO  ]=========//
     public static float aumentar(int[] lista_sueldos){
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n====[ Escriba el ID del empleado ]==== ");
-        int id = sc.nextInt();
-        System.out.println("====[  Escriba el porcentaje de cuanto quiere sumarle al sueldo del empleado  ]==== ");
-        int porcentaje = sc.nextInt();
+        int id = 0;
+        int porcentaje = 1;
+        Boolean salir = false;
+        System.out.println("\n======[  Para volver escriba -1  ]======");
+        System.out.println("======[  Tenga en cuenta que solo puede aumentar entre 5% y 10% a empleados entre 15000$ y 25000$");
+        
+        while(true){
+        
+        
+        System.out.println("\n======[ Escriba el ID del empleado ]==== ");
+        id = sc.nextInt();
+        
+        if (id == -1){
+            System.out.println("\n=======[  Volviendo al menu...  ]========");
+            salir = true;
+            break;
+            
+        }else if(id > lista_sueldos.length -1){
+            System.out.println("\n======[   ERROR   ]======");
+            System.out.println("======[  ID del empleado no existe  ]======");
+            continue;
+       
+        }else if(25000 < lista_sueldos[id] || 15000 > lista_sueldos[id]){
+            System.out.println("======[  ERROR  ]======");
+            System.out.println("======[  El sueldo del empleado no cumple los requisitos  ]======");
+            continue;
+        }       
+        else;
+        break;    
+       
+        }
+        while(true){
+        if (salir){return porcentaje/100;}
+        System.out.println("\n======[  Escriba el porcentaje a aumentar  ]======");
+        porcentaje = sc.nextInt();
+        
+        if (5 > porcentaje || 10 < porcentaje){
+            System.out.println("======[  ERROR  ]======");
+            System.out.println("======[  Solo aumento entre 5% y 10%  ]======");
+            continue;
+            
+            
+        }
+        else;
         lista_sueldos[id] = lista_sueldos[id] + lista_sueldos[id]*porcentaje/100;
-        System.out.println("====[  Sueldo aumentado con exito  ]====");
-        System.out.println("====[  " + "Empleado " + id + " Sueldo >> " + lista_sueldos[id] + "$  ]====");
-
+        System.out.println("====[   Sueldo aumentado con exito  ]====");
+        System.out.println("====[  " + " Empleado " + id + " Sueldo >> " + lista_sueldos[id] + "$  ]====");
         
-        
-        return lista_sueldos[id] + lista_sueldos[id]*porcentaje/100;
+    }
     }
 
 
@@ -125,7 +169,7 @@ public class proyecto{
     
     public static void menu(){
             System.out.println("\n=======[ MENU PRINCIPAL ]=======");
-            System.out.println("| 01- Cargar sueldo            |");
+            System.out.println("| 01- Cargar sueldos           |");
             System.out.println("| 02- Mostrar sueldos          |");
             System.out.println("| 03- Buscar sueldos           |");
             System.out.println("| 04- Rango de sueldos         |");
@@ -143,16 +187,12 @@ public class proyecto{
 //================================//
 //===========[  MAIN  ]===========//
 //================================//
-    public static void main(String[] args) {
-        
-    
-        
+    public static void main(String[] args) {        
         Scanner sc = new Scanner(System.in);
         int op = 0; 
-        System.out.println("====[  Bienvenido al sistema  ]====");       
+        System.out.println("=======[  Bienvenido al sistema  ]=======");       
         System.out.println("\n====[  Escriba la cantidad de empleados  ]=====");
         int empleados[] = new int[sc.nextInt()];
-        
         while (op != 9){
             menu();
             
