@@ -27,11 +27,12 @@ public class proyecto{
         Scanner sc = new Scanner(System.in);
         
         while (true){
-        System.out.println("\n====[  Escriba -1 para volver al menu  ]====");
-        System.out.println("====[  Escriba el ID del empleado:  ]====\n");
+        System.out.println("\n======[  Escriba -1 para volver al menu  ]======");
+        System.out.print("====[  Escriba el ID del empleado:  ]====\n>>> ");
         int num_emp = sc.nextInt();
         if (num_emp > lista_sueldos.length -1 ){
-            System.out.println("No existe tal empleado");
+            System.out.println("====[  ERROR  ]====");
+            System.out.println("=[ No existe empleado con ID " + num_emp + " ]=");
             continue;
         }else if(num_emp == -1){return false;}
         else{
@@ -82,41 +83,46 @@ public class proyecto{
         System.out.println("\n======[  Para volver escriba -1  ]======");
         System.out.println("======[  Tenga en cuenta que solo puede aumentar entre 5% y 10% a empleados entre 15000$ y 25000$");
         
-        while(true){
+        while(!salir){
         
         
-        System.out.println("\n======[ Escriba el ID del empleado ]==== ");
+        System.out.print("\n======[ Escriba el ID del empleado ]==== \n>>> "); 
         id = sc.nextInt();
+        
         
         if (id == -1){
             System.out.println("\n=======[  Volviendo al menu...  ]========");
             salir = true;
             break;
             
+           
+            
         }else if(id > lista_sueldos.length -1){
             System.out.println("\n======[   ERROR   ]======");
             System.out.println("======[  ID del empleado no existe  ]======");
+            System.out.println("======[  Rango valido entre 0 y " + (lista_sueldos.length-1) + "  ]======");
             continue;
        
         }else if(25000 < lista_sueldos[id] || 15000 > lista_sueldos[id]){
             System.out.println("======[  ERROR  ]======");
             System.out.println("======[  El sueldo del empleado no cumple los requisitos  ]======");
+            System.out.println("======[  El sueldo actual del empleado " + id + " es " + lista_sueldos[id] + "  ]======");
             continue;
         }       
         else;
-        break;    
+          
        
-        }
+        
         while(true){
-        if (salir){return porcentaje/100;}
+       
         System.out.println("\n======[  Escriba el porcentaje a aumentar  ]======");
         porcentaje = sc.nextInt();
-        
-        if (5 > porcentaje || 10 < porcentaje){
+        if(porcentaje == -1){break;}
+        else if(lista_sueldos[id] > 25000 ){System.out.println("======[  El sueldo del empleado a superado el limite  ]======"); break;}
+        else if (5 > porcentaje || 10 < porcentaje){
             System.out.println("======[  ERROR  ]======");
             System.out.println("======[  Solo aumento entre 5% y 10%  ]======");
             continue;
-            
             
         }
         else;
@@ -124,7 +130,12 @@ public class proyecto{
         System.out.println("====[   Sueldo aumentado con exito  ]====");
         System.out.println("====[  " + " Empleado " + id + " Sueldo >> " + lista_sueldos[id] + "$  ]====");
         
+        
+        
+        
     }
+    }    
+    return porcentaje;
     }
 
 
@@ -178,7 +189,7 @@ public class proyecto{
             System.out.println("| 07- Mostrar sueldo mas bajo  |");
             System.out.println("| 08- Mostrar sueldo mas alto  |");
             System.out.println("| 09- Salir                    |");
-            System.out.println("================================");
+            System.out.print("================================\n>>> ");
     }
 
 
@@ -191,7 +202,7 @@ public class proyecto{
         Scanner sc = new Scanner(System.in);
         int op = 0; 
         System.out.println("=======[  Bienvenido al sistema  ]=======");       
-        System.out.println("\n====[  Escriba la cantidad de empleados  ]=====");
+        System.out.print("\n====[  Escriba la cantidad de empleados  ]=====\n>>> ");
         int empleados[] = new int[sc.nextInt()];
         while (op != 9){
             menu();
