@@ -32,9 +32,15 @@ public class proyecto{
     public static void cargarSueldo(int[] lista_sueldos){
         Scanner sc = new Scanner(System.in);
         System.out.println(ANSI_GREEN + "====[  Escriba el sueldo  ]====");
+        System.out.println("====[  Escriba -1 para volver  ]====");
         for(int i= 0; i<lista_sueldos.length;i++){
             System.out.print("Empleado " +ANSI_YELLOW+ i +ANSI_GREEN+ " Sueldo >> ");
-            lista_sueldos[i] = sc.nextInt();
+            int nuevo_sueldo = sc.nextInt();
+            if (nuevo_sueldo == -1){
+                break;
+            }
+            else
+                lista_sueldos[i] = nuevo_sueldo;
         
         }
         System.out.println(ANSI_RESET);
@@ -240,9 +246,65 @@ public class proyecto{
             System.out.println("\t\t\t| 03- Buscar sueldos           | 04- Rango de sueldos         |");
             System.out.println("\t\t\t| 05- Sueldo promedio          | 06- Aumentar sueldo          |");
             System.out.println("\t\t\t| 07- Mostrar sueldo mas bajo  | 08- Mostrar sueldo mas alto  |");
-            System.out.println("------------------------|_________________________/"+ ANSI_RED + "09- Salir"+ ANSI_RESET + ANSI_BLUE +"\\_________________________|");
+            System.out.println("\t\t\t| 09- Cambio de sueldo directo |                              |");
+            System.out.println("------------------------|_________________________/"+ ANSI_RED + "10- Salir"+ ANSI_RESET + ANSI_BLUE +"\\_________________________|");
             System.out.print("\n\t\t\t>>> " + ANSI_RESET);
     }
+
+
+
+
+    public static void cambiarSueldo(int[] emple){
+        Scanner sc = new Scanner(System.in);
+        int id = 0;
+        limpiar();
+        System.out.println(ANSI_YELLOW + "=========[  MENU DE CAMBIO DE SUELDO  ]======"+ANSI_RESET);
+        while (true){
+        
+        
+        System.out.print(ANSI_BLUE+ "======[  Para volver al menu principal escriba -1  ]======\n"+ANSI_RESET);
+        System.out.print(ANSI_BLUE+ "======[  Escriba el " + ANSI_YELLOW + "ID" + ANSI_BLUE + " del empleado  ]======\n>>> "+ANSI_RESET);
+        
+        
+        id = sc.nextInt();
+
+        if (id > emple.length-1){
+            limpiar();
+            System.out.println(ANSI_RED+"======[  ERROR  ]======");    
+            System.out.println("======[  El " + ANSI_YELLOW + "ID "+ id + ANSI_RED + " no existe  ]======"+ANSI_RESET); 
+            continue;
+        }
+        else if(id == -1){limpiar();break;}
+        
+        limpiar();
+        System.out.print(ANSI_CYAN + "======[  Escriba el nuevo sueldo del empleado  ]======\n>>> "+ANSI_RESET);
+        int nuevo = sc.nextInt();
+        if(nuevo == -1){limpiar();break;}
+        emple[id] = nuevo;
+        limpiar();
+        System.out.println(ANSI_GREEN+"======[  EXITO  ]======");
+        System.out.println(ANSI_GREEN+"======[  Empleado " +ANSI_YELLOW +id +ANSI_GREEN+ " Sueldo >> " + nuevo + "$\n" +ANSI_RESET);
+        
+        
+        
+        }
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -258,7 +320,7 @@ public class proyecto{
         System.out.print(ANSI_BLUE + "\n====[  Escriba la cantidad de empleados  ]=====\n>>> " + ANSI_RESET);
         int empleados[] = new int[sc.nextInt()];
         limpiar();
-        while (op != 9){
+        while (op != 10){
             menu();
             
             op = sc.nextInt();
@@ -287,6 +349,8 @@ public class proyecto{
             }else if (op == 8){
                 limpiar();
                 max(empleados);
+            }else if (op == 9){
+                cambiarSueldo(empleados);
             }
             
         }
