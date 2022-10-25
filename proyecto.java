@@ -1,6 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
-public class ProyectoS{
+public class Proyecto{
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -172,13 +172,14 @@ public class ProyectoS{
         
     }
 
-    public static void promedio(int[] lista_sueldos){
+    public static float promedio(int[] lista_sueldos){
         float suma = 0;
         for(int i = 0; i < lista_sueldos.length;i++){
             suma += lista_sueldos[i];
         }
         System.out.println(ANSI_CYAN + "\t\t\t\t=====[  El promedio de todos los sueldos es:  ]=====");
         System.out.println("\t\t\t\t======> "+ANSI_RESET+ANSI_GREEN+ suma / lista_sueldos.length + "$"+ANSI_RESET);
+        return suma;
     }
     
     public static void min(String[] nombres, int[] lista_sueldos,int[] ordenados){
