@@ -71,7 +71,7 @@ public class Proyecto{
         System.out.println(ANSI_BLUE+"\n\t\t\t\t====[  Los sueldos entre " + ANSI_YELLOW +num1 +ANSI_BLUE +" y " +ANSI_YELLOW  +num2 + ANSI_BLUE+" son:  ]====");
         int cantidad = 0;
         for (int i = 0; i < lista_sueldos.length; i++ ){
-            if(lista_sueldos[i] > num1-1 && lista_sueldos[i] < num2-1){
+            if(lista_sueldos[i] >= num1 && lista_sueldos[i] <= num2){
                 System.out.println("\t\t\t\tEmpleado " +ANSI_YELLOW + nombres[i] +ANSI_RESET+ANSI_BLUE+ " Sueldo >> " + lista_sueldos[i]);
                 cantidad ++;
             }
