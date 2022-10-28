@@ -64,7 +64,7 @@ float aumentar(int lista_sueldos[], int  tamano){
     printf("\nEscriba el id del empleado con un sueldo entre 15000 y 25000\n");
     printf("Escriba -1 para salir\n");
     scanf("%d",&id);
-    if(id == -1){system("clear");return 0.0;}
+    if(id == -1){system("cls");return 0.0;}
     else if (id > tamano || id < 0){printf("\nERROR -> ID invalido\n"); continue;}
     else if (lista_sueldos[id] < 15000 || lista_sueldos[id] > 25000){printf("\nERROR -> Sueldo del empleado invalido\n"); continue;}
     else
@@ -78,14 +78,36 @@ float aumentar(int lista_sueldos[], int  tamano){
     }
     return lista_sueldos[id];
 }
+void min(int empleados[], int tamano){
+    int j = empleados[0];
+    int emp = 0;
+    for(int i = 0; i < tamano; i++){
+        if(empleados[i] < j){
+            j = empleados[i];
+            emp = i;
+        }
+    }
+    printf("Empleado %d Sueldo >> %d",emp,j);
+}
+void max(int empleados[], int tamano){
+    int j = empleados[0];
+    int emp = 0;
+    for(int i = 0; i < tamano; i++){
+        if(empleados[i] > j){
+            j = empleados[i];
+            emp = i;
+        }
+    }
+    printf("Empleado %d Sueldo >> %d",emp,j);
+}
 
-int main(){
+void main(){
     int op;
     int cantidad;
     printf("\nBienvenido al Sistema\n");
     printf("\nEscriba la cantidad de empleados: \n");
     scanf("%d",&cantidad);
-    system("clear");
+    system("cls");
     int empleados[cantidad];
     int tamano = sizeof(empleados) / sizeof(empleados[0]);
     while (true){
@@ -99,15 +121,20 @@ int main(){
     printf("4- Buscar por rango\n");
     printf("5- Promedio\n");
     printf("6- Aumentar\n");
+    printf("7- Mostrar Minimo\n");
+    printf("8- Mostrar Maximo\n");
+    printf("9- Salir\n");
     scanf("%d",&op);
-    system("clear");
+    system("cls");
     if(op == 1){cargarSueldos(empleados,tamano);}
     else if(op == 2){mostrarSueldos(empleados,tamano);}
     else if(op == 3){buscar(empleados,tamano);}
     else if(op == 4){rangoSueldos(empleados,tamano);}
     else if(op == 5){promedio(empleados,tamano);}
     else if(op == 6){aumentar(empleados,tamano);}
-    
+    else if(op == 7){min(empleados,tamano);}
+    else if(op == 8){max(empleados,tamano);}
+    else if(op == 9){break;}
     }
-    return 0;
+    
 }
