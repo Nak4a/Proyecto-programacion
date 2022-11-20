@@ -1,6 +1,9 @@
 import java.util.Arrays;
 import java.util.Scanner;
 public class Proyecto{
+    
+    
+    // DESIGNA A CADA ANSI_X UN VALOR STRING
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -20,7 +23,8 @@ public class Proyecto{
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
     
     public static void menu(){
-            
+            // Imprime el menu hermano no es tan complicado
+            // \t es para que escriba 4 espacios asi queda centrado en la terminal
         System.out.println(ANSI_BLUE + "\n------------------------|======================"+ANSI_YELLOW +"[ MENU PRINCIPAL ]"+ANSI_BLUE+"=====================|");
         System.out.println("\t\t\t| 01- Cargar sueldos           | 02- Mostrar sueldos          |");
         System.out.println("\t\t\t| 03- Buscar sueldos           | 04- Rango de sueldos         |");
@@ -34,24 +38,26 @@ public class Proyecto{
     public static void limpiar(){
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
+        // No se solo se que es para limpiar la terminal
     }
     
     public static void cargarSueldo(String[] nombres,int[] lista_sueldos){
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in); //Crea el Scanner
         System.out.println(ANSI_GREEN + "======[  Escriba el sueldo  para cada empleado  ]======"); 
         System.out.println("        ======[  Escriba 0 para volver  ]======");
-        for(int i = 0;i<nombres.length;i++){
-            System.out.print("Empleado " +ANSI_YELLOW+ nombres[i] +ANSI_GREEN+ " Sueldo ==> ");
-            int sueldo = sc.nextInt();
-            if(sueldo == 0){
+        for(int i = 0;i<nombres.length;i++){ //crea un for
+            System.out.print("Empleado " +ANSI_YELLOW+ nombres[i] +ANSI_GREEN+ " Sueldo ==> "); // imprime el nombre del empleado y le pide un sueldo 
+            int sueldo = sc.nextInt();                                                          // para ese empleado
+            if(sueldo == 0){ // si el sueldo que escribio es 0 sale
                 break;
             }else
-                lista_sueldos[i] = sueldo;
+                lista_sueldos[i] = sueldo; // si el sueldo no es 0 anade el sueldo
         }
         System.out.println(ANSI_RESET);
         limpiar();
     }
     public static void mostrarSueldo(String[] nombres,int[] lista_sueldos){
+        // Imprime todos los sueldos 
         System.out.println(ANSI_YELLOW+ "\t\t\t\t\t     ======[  Sueldos  ]======"+ANSI_RESET );
         for(int i = 0;i<lista_sueldos.length;i++){
             System.out.println(ANSI_GREEN + "\t\t\t\t       ====[  Empleado " + ANSI_YELLOW +nombres[i] +ANSI_GREEN+ " Sueldo >> "+ ANSI_YELLOW + lista_sueldos[i] + ANSI_GREEN+"$  ]====");
@@ -246,47 +252,47 @@ public class Proyecto{
     
 
     public static void main(String[] args) {
-        limpiar();
-        Scanner sc = new Scanner(System.in);
+        limpiar(); // limpia la terminal
+        Scanner sc = new Scanner(System.in); // crea el scanner 
         System.out.println(ANSI_GREEN + "=======[  Bienvenido al sistema  ]=======" + ANSI_RESET);       
         System.out.print(ANSI_BLUE + "\n====[  Escriba la cantidad de empleados  ]=====\n>>> ");
-        String[] nombres = new String[sc.nextInt()];
-        int sueldos[] = new int[nombres.length];
-        String numeros[] = {"0","1","2","3","4","5","6","7","8","9"};
-        String nombre, apellido;
-        Boolean cedula;
-        System.out.println("======[  Escriba el nombre, cedula o id para cada empleado  ]======"+ANSI_RESET);
-        for(int i = 0; i<nombres.length;i++){
-            cedula = false;
-            System.out.print(ANSI_GREEN + "\nNombre: ");
-            nombre =  sc.next();
-            for(int y = 0;y<numeros.length;y++){
-                if(nombre.contains(numeros[y])){
-                    nombres[i] = nombre;
-                    cedula = true;
-                    break;
+        String[] nombres = new String[sc.nextInt()]; // crea el array con la longitud de la cantidad de empleados
+        int sueldos[] = new int[nombres.length]; // crea el array de sueldos con la misma logitud que el de nombres
+        String numeros[] = {"0","1","2","3","4","5","6","7","8","9"}; // crea un array con todos los numeros
+        String nombre, apellido; // crea las variables nombre y apellido
+        Boolean cedula; // crea la variable booleana(True/False) llamada cedula
+        System.out.println("======[  Escriba el nombre, cedula o id para cada empleado  ]======"+ANSI_RESET); // Imprime eso xd uwu
+        for(int i = 0; i<nombres.length;i++){ // Empieza un bucle for
+            cedula = false; // iguala cedula a false
+            System.out.print(ANSI_GREEN + "\nNombre: "); // Le pide el nombre del empleado
+            nombre =  sc.next(); // Escribe el nombre del empleado y lo guarda
+            for(int y = 0;y<numeros.length;y++){ // empieza otro for xd
+                if(nombre.contains(numeros[y])){ // Si el nombre contiene algun numero  de el array numeros hace lo que tiene adentro del if, sino sigue xd
+                    nombres[i] = nombre;  // Chupa el nombre que puso el usuario y lo guarda en el array llamado nombres
+                    cedula = true; // iguala cedula a True
+                    break; //Rompe este bucle for
                 }
             }
-            if(!cedula){
-                System.out.print("Apellido: ");
-                apellido = sc.next();
-                nombres[i] = "" + nombre + " " + apellido;
+            if(!cedula){ // Si cedula es False
+                System.out.print("Apellido: "); // Le pide el apellido 
+                apellido = sc.next(); // Escribe el apellido
+                nombres[i] = "" + nombre + " " + apellido; // Guarda en el array nombres el nombre y el apellido
             }
         }
         
         limpiar();
         System.out.println(ANSI_RESET);
-        int op = 0;
+        int op = 0; // Crea la variable op y la iguala a 0
         while (op != 10){
-            int ordenados[] = new int[sueldos.length];
-            for(int i = 0;i<ordenados.length;i++){ordenados[i] = sueldos[i];}
-            Arrays.sort(ordenados);
-            menu();
-            op = sc.nextInt();
-            limpiar();
+            int ordenados[] = new int[sueldos.length]; // crea un array llamado ordenados
+            for(int i = 0;i<ordenados.length;i++){ordenados[i] = sueldos[i];} // Copia todos los elementos del array numeros en el array ordenados
+            Arrays.sort(ordenados); // Ordena el array ordenados
+            menu(); // Imprime el menu (ver funcion menu)
+            op = sc.nextInt(); // Escribe una opcion
+            limpiar(); // limpia la consola
             if (op == 1){
                 limpiar();
-                cargarSueldo(nombres,sueldos);
+                cargarSueldo(nombres,sueldos); // va a la funcion cargarSueldo
             }else if (op == 2){
                 limpiar();
                 mostrarSueldo(nombres,sueldos);
@@ -309,11 +315,11 @@ public class Proyecto{
                 limpiar();
                 max(nombres,sueldos,ordenados);
             }else if (op == 9){
-                while (true){
-                submenu();
-                int subop = sc.nextInt();
-                limpiar();
-                if(subop == 1){ascendente(nombres, sueldos, ordenados);}
+                while (true){ // Empieza un bucle while
+                submenu(); // Imprime el submenu
+                int subop = sc.nextInt(); // le pide una opcion
+                limpiar(); // limpia
+                if(subop == 1){ascendente(nombres, sueldos, ordenados);} // si quiere la opcion uno se la damos perri 
                 else if(subop == 2){descendente(nombres, sueldos, ordenados);}
                 else if(subop == 3){dolar(nombres,sueldos);}
                 else if(subop == 4){break;}
